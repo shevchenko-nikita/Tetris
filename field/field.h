@@ -3,8 +3,6 @@
 #include <vector>
 #include <cstdlib>
 
-#include "../shape/shape.h"
-
 enum class BlockColors
 {
     NONE,
@@ -23,8 +21,8 @@ enum class MoveDirection
     RIGHT
 };
 
-//namespace Shape
-//{
+namespace Shape
+{
     struct Coordinate
     {
         int x;
@@ -53,7 +51,7 @@ enum class MoveDirection
         std::vector<Coordinate> blocks;
         BlockColors color;
     };
-//};
+};
 
 class Field
 {
@@ -75,10 +73,10 @@ public:
         }
     }
 
-    bool CanMove(Shape& shape, MoveDirection direction);
-    bool Move(Shape& shape, MoveDirection direction);
+    bool CanMove(Shape::Shape& shape, MoveDirection direction);
+    bool Move(Shape::Shape& shape, MoveDirection direction);
 
-    void UpdateField(Shape& shape, MoveDirection direction);
+    void UpdateField(Shape::Shape& shape, MoveDirection direction);
 
 private:
     // In blocks[i][j] we contain info about color of the block.

@@ -15,7 +15,7 @@ int main()
     srand(time(NULL));
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH * 40, WINDOW_HEIGHT * 40), "Tetris");
 
-    Shape shape;
+    Shape::Shape shape;
 
     Field field;
 

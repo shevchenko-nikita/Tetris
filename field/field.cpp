@@ -1,6 +1,6 @@
 #include "field.h"
 
-bool Field::CanMove(Shape& shape, MoveDirection direction)
+bool Field::CanMove(Shape::Shape& shape, MoveDirection direction)
 {
     for(const auto& block : shape.blocks)
     {
@@ -21,7 +21,7 @@ bool Field::CanMove(Shape& shape, MoveDirection direction)
     return true;
 }
 
-bool Field::Move(Shape& shape, MoveDirection direction)
+bool Field::Move(Shape::Shape& shape, MoveDirection direction)
 {
     if(!CanMove(shape, direction))
     {
@@ -47,7 +47,7 @@ bool Field::Move(Shape& shape, MoveDirection direction)
     return true;
 }
 
-void Field::UpdateField(Shape& shape, MoveDirection direction)
+void Field::UpdateField(Shape::Shape& shape, MoveDirection direction)
 {
     Move(shape, direction);
 
