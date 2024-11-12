@@ -80,7 +80,7 @@ int main()
                     piece.setFillColor(sf::Color::Magenta);
                     break;
                 case BlockColors::GREEN:
-                    piece.setFillColor(sf::Color::Red);
+                    piece.setFillColor(sf::Color::Green);
                     break;
             }
 
