@@ -1,5 +1,10 @@
 #pragma once
 
+#include <vector>
+#include <cstdlib>
+
+#include "../shape/shape.h"
+
 enum class BlockColors
 {
     NONE,
@@ -12,10 +17,43 @@ enum class BlockColors
 
 enum class MoveDirection
 {
+    NONE,
     DOWN,
     LEFT,
     RIGHT
 };
+
+//namespace Shape
+//{
+    struct Coordinate
+    {
+        int x;
+        int y;
+    };
+
+    const std::vector<std::vector<Coordinate>> ALL_SHAPES =
+    {
+            {{0, 0}, {1, 0}, {1, 1}, {1, 2}},
+            {{0, 0}, {0, 1}, {0, 2}, {0, 3}},
+            {{1, 0}, {1, 1}, {1, 2}, {0, 2}},
+            {{0, 0}, {0, 1}, {1, 0}, {1, 1}},
+            {{1, 0}, {1, 1}, {0, 1}, {0, 2}},
+            {{0, 1}, {1, 0}, {1, 1}, {1, 2}},
+            {{0, 0}, {0, 1}, {1, 1}, {1, 2}}
+    };
+
+    struct Shape
+    {
+        Shape()
+        {
+            int shape_id = rand() % 7;
+            blocks = ALL_SHAPES[shape_id];
+            color = static_cast<BlockColors>(rand() % 5 + 1);
+        }
+        std::vector<Coordinate> blocks;
+        BlockColors color;
+    };
+//};
 
 class Field
 {
@@ -37,9 +75,10 @@ public:
         }
     }
 
-//    bool CanMove(MoveDirection direction);
-//    bool Move(MoveDirection direction);
+    bool CanMove(Shape& shape, MoveDirection direction);
+    bool Move(Shape& shape, MoveDirection direction);
 
+    void UpdateField(Shape& shape, MoveDirection direction);
 
 private:
     // In blocks[i][j] we contain info about color of the block.
