@@ -56,7 +56,7 @@ namespace Shape
 class Field
 {
 public:
-    const int BLOCK_SIZE = 40;
+    const int CELL_SIZE = 40;
     // Field size in blocks
     //
     const int WIDTH = 10;
@@ -68,7 +68,7 @@ public:
         {
             for(int j = 0; j < WIDTH; ++j)
             {
-                blocks[i][j] = BlockColors::NONE;
+                cells[i][j] = BlockColors::NONE;
             }
         }
     }
@@ -79,9 +79,9 @@ public:
     void UpdateField(Shape::Shape& shape, MoveDirection direction);
 
 private:
-    // In blocks[i][j] we contain info about color of the block.
+    // In cells[i][j] we contain info about color of the block.
     // If there is no block in this position - there will be NONE.
     //
-    BlockColors blocks[20][10];
+    BlockColors cells[20][10];
 
 };
