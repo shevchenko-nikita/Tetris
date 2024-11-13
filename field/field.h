@@ -44,10 +44,10 @@ namespace Shape
     {
         Shape()
         {
-            change();
+            Change();
         }
 
-        void change()
+        void Change()
         {
             int shape_id = rand() % 7;
             blocks = ALL_SHAPES[shape_id];
@@ -82,7 +82,7 @@ public:
     bool CanMove(Shape::Shape& shape, MoveDirection direction);
     bool Move(Shape::Shape& shape, MoveDirection direction);
 
-    BlockColors getColor(int i, int j) { return cells[i][j]; }
+    BlockColors GetColor(int i, int j) { return cells[i][j]; }
 
     void UpdateField(Shape::Shape& shape);
 

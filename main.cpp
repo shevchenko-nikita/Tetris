@@ -36,10 +36,9 @@ int main()
             {
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { direction = MoveDirection::LEFT; }
                 else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { direction = MoveDirection::RIGHT; }
+                field.Move(shape, direction);
             }
         }
-
-        field.Move(shape, direction);
 
         window.clear(sf::Color::White);
 
@@ -53,7 +52,7 @@ int main()
                 sf::RectangleShape block(sf::Vector2f(40, 40));
                 block.setPosition(x, y);
 
-                switch (field.getColor(i, j))
+                switch (field.GetColor(j, i))
                 {
                     case BlockColors::RED:
                         block.setFillColor(sf::Color::Red);
@@ -127,7 +126,7 @@ int main()
             if (!field.Move(shape, MoveDirection::DOWN))
             {
                 field.UpdateField(shape);
-                shape.change();
+                shape.Change();
             }
         }
 
