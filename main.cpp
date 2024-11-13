@@ -4,6 +4,7 @@
 #include <chrono>
 #include <thread>
 #include <time.h>
+#include <cassert>
 
 #include "field/field.h"
 
@@ -15,9 +16,10 @@ int main()
     srand(time(NULL));
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH * 40, WINDOW_HEIGHT * 40), "Tetris");
 
+    Field field;
     Shape::Shape shape;
 
-    Field field;
+    auto lastFallTime = std::chrono::high_resolution_clock::now();
 
     while (window.isOpen())
     {
@@ -50,6 +52,32 @@ int main()
 
                 sf::RectangleShape block(sf::Vector2f(40, 40));
                 block.setPosition(x, y);
+
+                switch (field.getColor(i, j))
+                {
+                    case BlockColors::RED:
+                        block.setFillColor(sf::Color::Red);
+                        break;
+                    case BlockColors::BLUE:
+                        block.setFillColor(sf::Color::Blue);
+                        break;
+                    case BlockColors::YELLOW:
+                        block.setFillColor(sf::Color::Yellow);
+                        break;
+                    case BlockColors::ORANGE:
+                        block.setFillColor(sf::Color::Magenta);
+                        break;
+                    case BlockColors::GREEN:
+                        block.setFillColor(sf::Color::Green);
+                        break;
+                    case BlockColors::NONE:
+                        block.setFillColor(sf::Color::White);
+                        break;
+                    default:
+                        std::cerr << "Wrong block color" << std::endl;
+                        assert(false);
+                        break;
+                }
 
                 block.setOutlineThickness(1.f);
                 block.setOutlineColor(sf::Color(125, 125, 125));
@@ -92,8 +120,16 @@ int main()
             window.draw(piece);
         }
 
-        field.Move(shape, MoveDirection::DOWN);
-//        std::this_thread::sleep_for(std::chrono::milliseconds(650));
+        auto now = std::chrono::high_resolution_clock::now();
+        int timeSinceLastFall = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastFallTime).count();
+        if (timeSinceLastFall > 450) {
+            lastFallTime = now;
+            if (!field.Move(shape, MoveDirection::DOWN))
+            {
+                field.UpdateField(shape);
+                shape.change();
+            }
+        }
 
         window.display();
     }

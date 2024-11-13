@@ -44,10 +44,16 @@ namespace Shape
     {
         Shape()
         {
+            change();
+        }
+
+        void change()
+        {
             int shape_id = rand() % 7;
             blocks = ALL_SHAPES[shape_id];
             color = static_cast<BlockColors>(rand() % 5 + 1);
         }
+
         std::vector<Coordinate> blocks;
         BlockColors color;
     };
@@ -76,7 +82,9 @@ public:
     bool CanMove(Shape::Shape& shape, MoveDirection direction);
     bool Move(Shape::Shape& shape, MoveDirection direction);
 
-    void UpdateField(Shape::Shape& shape, MoveDirection direction);
+    BlockColors getColor(int i, int j) { return cells[i][j]; }
+
+    void UpdateField(Shape::Shape& shape);
 
 private:
     // In cells[i][j] we contain info about color of the block.

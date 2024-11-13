@@ -1,3 +1,4 @@
+#include <iostream>
 #include "field.h"
 
 bool Field::CanMove(Shape::Shape& shape, MoveDirection direction)
@@ -47,10 +48,8 @@ bool Field::Move(Shape::Shape& shape, MoveDirection direction)
     return true;
 }
 
-void Field::UpdateField(Shape::Shape& shape, MoveDirection direction)
+void Field::UpdateField(Shape::Shape& shape)
 {
-    Move(shape, direction);
-
     for(const auto& block : shape.blocks)
     {
         cells[block.x][block.y] = shape.color;
