@@ -1,19 +1,27 @@
 #include <iostream>
 #include "field.h"
 
-bool Field::CanMove(Shape::Shape& shape, MoveDirection direction)
+bool Field::IsCellEmpty(Shape::Coordinate position) const
+{
+    if(position.x < 0 || position.y < 0) { return false; }
+    if(position.x >= 10 || position.y >= 20) { return false; }
+    if(cells[position.y][position.x] != BlockColors::NONE) { return false; }
+    return true;
+}
+
+bool Field::CanMove(Shape::Shape& shape, MoveDirection direction) const
 {
     for(const auto& block : shape.blocks)
     {
-        if(block.x - 1 < 0 || cells[block.y][block.x - 1] != BlockColors::NONE)
+        if(!IsCellEmpty({block.x - 1, block.y}))
         {
             if(direction == MoveDirection::LEFT) { return false; }
         }
-        if(block.x + 1 >= 10 || cells[block.y][block.x + 1] != BlockColors::NONE)
+        if(!IsCellEmpty({block.x + 1, block.y}))
         {
             if(direction == MoveDirection::RIGHT) { return false; }
         }
-        if(block.y + 1 >= 20 || cells[block.y + 1][block.x] != BlockColors::NONE)
+        if(!IsCellEmpty({block.x, block.y + 1}))
         {
             if(direction == MoveDirection::DOWN) { return false; }
         }

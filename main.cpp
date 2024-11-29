@@ -36,6 +36,7 @@ int main()
             {
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { direction = MoveDirection::LEFT; }
                 else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { direction = MoveDirection::RIGHT; }
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { direction = MoveDirection::DOWN; }
                 field.Move(shape, direction);
             }
         }
@@ -89,6 +90,12 @@ int main()
         {
             float x = block.x * 40.f;
             float y = block.y * 40.f;
+
+            if(field.IsCellEmpty(block))
+            {
+                std::cout << "GAME OVER!";
+                return 0;
+            }
 
             sf::RectangleShape piece(sf::Vector2f(40, 40));
 

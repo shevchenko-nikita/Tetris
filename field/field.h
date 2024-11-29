@@ -79,7 +79,8 @@ public:
         }
     }
 
-    bool CanMove(Shape::Shape& shape, MoveDirection direction);
+    bool IsCellEmpty(Shape::Coordinate position) const;
+    bool CanMove(Shape::Shape& shape, MoveDirection direction) const;
     bool Move(Shape::Shape& shape, MoveDirection direction);
 
     BlockColors GetColor(int i, int j) { return cells[i][j]; }
