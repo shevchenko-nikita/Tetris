@@ -1,16 +1,17 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 #include <vector>
 #include <cstdlib>
 
-enum class BlockColors
+const std::array<sf::Color, 5> COLORS =
 {
-    NONE,
-    BLUE, // #0341AE
-    GREEN, // #72CB3B
-    YELLOW, // #FFD500
-    ORANGE, // #FF971C
-    RED // FF3213
+    sf::Color(3, 65, 174),
+    sf::Color(114, 203, 59),
+    sf::Color(255, 213, 0),
+    sf::Color(255, 151, 28),
+    sf::Color(255, 50, 19)
 };
 
 enum class MoveDirection
@@ -49,20 +50,25 @@ namespace Shape
 
         void Change()
         {
-            int shape_id = rand() % 7;
-            blocks = ALL_SHAPES[shape_id];
-            color = static_cast<BlockColors>(rand() % 5 + 1);
+            static int colorId = 0;
+            int shapeId = rand() % 7;
+
+            blocks = ALL_SHAPES[shapeId];
+            color = COLORS[colorId];
+            colorId = (colorId + 1) % 5;
         }
 
         std::vector<Coordinate> blocks;
-        BlockColors color;
+        sf::Color color;
     };
 };
+
 
 class Field
 {
 public:
     const int CELL_SIZE = 40;
+
     // Field size in blocks
     //
     const int WIDTH = 10;
@@ -74,7 +80,7 @@ public:
         {
             for(int j = 0; j < WIDTH; ++j)
             {
-                cells[i][j] = BlockColors::NONE;
+                cells[i][j] = sf::Color::White;
             }
         }
     }
@@ -83,14 +89,10 @@ public:
     bool CanMove(Shape::Shape& shape, MoveDirection direction) const;
     bool Move(Shape::Shape& shape, MoveDirection direction);
 
-    BlockColors GetColor(int i, int j) { return cells[i][j]; }
+    sf::Color GetColor(int i, int j) { return cells[i][j]; }
 
     void UpdateField(Shape::Shape& shape);
 
 private:
-    // In cells[i][j] we contain info about color of the block.
-    // If there is no block in this position - there will be NONE.
-    //
-    BlockColors cells[20][10];
-
+    sf::Color cells[20][10];
 };

@@ -5,7 +5,7 @@ bool Field::IsCellEmpty(Shape::Coordinate position) const
 {
     if(position.x < 0 || position.y < 0) { return false; }
     if(position.x >= 10 || position.y >= 20) { return false; }
-    if(cells[position.y][position.x] != BlockColors::NONE) { return false; }
+    if(cells[position.y][position.x] != sf::Color::White) { return false; }
     return true;
 }
 
