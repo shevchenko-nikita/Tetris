@@ -62,4 +62,35 @@ void Field::UpdateField(Shape::Shape& shape)
     {
         cells[block.y][block.x] = shape.color;
     }
+
+    for(int i = 19; i >= 0; --i)
+    {
+        bool f = false;
+        for(int j = 0; j < 10; ++j)
+        {
+            if(cells[i][j] == sf::Color::White)
+            {
+                f = true;
+                break;
+            }
+        }
+
+        if(f) { continue; }
+
+        for(int j = 0; j < 10; ++j)
+        {
+            cells[i][j] = sf::Color::White;
+        }
+
+        for(int k = i - 1; k >= 0; --k)
+        {
+            for(int j = 0; j < 10; ++j)
+            {
+                cells[k + 1][j] = cells[k][j];
+                cells[k][j] = sf::Color::White;
+            }
+        }
+
+        i++;
+    }
 }

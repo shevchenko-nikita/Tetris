@@ -11,17 +11,6 @@
 const int WINDOW_WIDTH = 10;
 const int WINDOW_HEIGHT = 20;
 
-
-//enum class BlockColors
-//{
-//    NONE,
-//    BLUE, // #0341AE
-//    GREEN, // #72CB3B
-//    YELLOW, // #FFD500
-//    ORANGE, // #FF971C
-//    RED // FF3213
-//};
-
 void Tetris()
 {
     srand(time(NULL));
@@ -52,8 +41,6 @@ void Tetris()
             }
         }
 
-//        window.clear(Color::Yellow);
-
         for(int i = 0; i < field.WIDTH; ++i)
         {
             for(int j = 0; j < field.HEIGHT; ++j)
@@ -66,7 +53,7 @@ void Tetris()
 
                 block.setFillColor(field.GetColor(j, i));
 
-                block.setOutlineThickness(1.f);
+                block.setOutlineThickness(1.3f);
                 block.setOutlineColor(sf::Color(125, 125, 125));
 
                 window.draw(block);
@@ -90,7 +77,7 @@ void Tetris()
 
             piece.setPosition(x, y);
 
-            piece.setOutlineThickness(1.f);
+            piece.setOutlineThickness(1.3f);
             piece.setOutlineColor(sf::Color(125, 125, 125));
 
             window.draw(piece);
