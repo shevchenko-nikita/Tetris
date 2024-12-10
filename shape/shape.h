@@ -51,6 +51,9 @@ namespace Shape
 
         std::vector<Coordinate> blocks;
         sf::Color color;
+
+        SHAPE_TYPES shapeType;
+        uint8_t state = 0;
     };
 
     const std::vector<Coordinate> J_BLOCK_STATES[4] =
@@ -82,17 +85,22 @@ namespace Shape
 
     const std::vector<Coordinate> E_BLOCK_STATES[4] =
     {
-            {{4, 1}, {5, 0}, {5, 1}, {5, 2}}
+            {{4, 1}, {5, 0}, {5, 1}, {5, 2}},
+            {{5, 0}, {4, 1}, {5, 1}, {6, 1}},
+            {{5, 0}, {5, 1}, {5, 2}, {6, 1}},
+            {{4, 1}, {5, 1}, {6, 1}, {5, 2}}
     };
 
     const std::vector<Coordinate> Z_BLOCK_STATES[4] =
     {
-            {{5, 0}, {5, 1}, {4, 1}, {4, 2}}
+            {{5, 0}, {5, 1}, {4, 1}, {4, 2}},
+            {{4, 0}, {5, 0}, {5, 1}, {6, 1}}
     };
 
     const std::vector<Coordinate> S_BLOCK_STATES[4] =
     {
-            {{4, 0}, {4, 1}, {5, 1}, {5, 2}}
+            {{4, 0}, {4, 1}, {5, 1}, {5, 2}},
+            {{4, 1}, {5, 1}, {5, 0}, {6, 0}}
     };
 
 };

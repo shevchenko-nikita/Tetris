@@ -37,6 +37,7 @@ void Tetris()
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { direction = MoveDirection::LEFT; }
                 else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { direction = MoveDirection::RIGHT; }
                 else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { direction = MoveDirection::DOWN; }
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) { shape.Rotate(); }
                 field.Move(shape, direction);
             }
         }
