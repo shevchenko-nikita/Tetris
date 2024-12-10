@@ -5,7 +5,7 @@
 #include <vector>
 #include <cstdlib>
 
-enum class MoveDirection
+enum class MOVE_DIRECTION
 {
     NONE,
     DOWN,
@@ -35,8 +35,8 @@ public:
     }
 
     bool IsCellEmpty(Shape::Coordinate position) const;
-    bool CanMove(Shape::Shape& shape, MoveDirection direction) const;
-    bool Move(Shape::Shape& shape, MoveDirection direction);
+    bool CanMove(Shape::Shape& shape, MOVE_DIRECTION direction) const;
+    bool Move(Shape::Shape& shape, MOVE_DIRECTION direction);
 
     sf::Color GetColor(int i, int j) { return cells[i][j]; }
 

@@ -9,48 +9,45 @@ bool Field::IsCellEmpty(Shape::Coordinate position) const
     return true;
 }
 
-bool Field::CanMove(Shape::Shape& shape, MoveDirection direction) const
+bool Field::CanMove(Shape::Shape& shape, MOVE_DIRECTION direction) const
 {
-    for(const auto& block : shape.blocks)
+    for(const auto& block : shape.GetBlocks())
     {
         if(!IsCellEmpty({block.x - 1, block.y}))
         {
-            if(direction == MoveDirection::LEFT) { return false; }
+            if(direction == MOVE_DIRECTION::LEFT) { return false; }
         }
         if(!IsCellEmpty({block.x + 1, block.y}))
         {
-            if(direction == MoveDirection::RIGHT) { return false; }
+            if(direction == MOVE_DIRECTION::RIGHT) { return false; }
         }
         if(!IsCellEmpty({block.x, block.y + 1}))
         {
-            if(direction == MoveDirection::DOWN) { return false; }
+            if(direction == MOVE_DIRECTION::DOWN) { return false; }
         }
     }
 
     return true;
 }
 
-bool Field::Move(Shape::Shape& shape, MoveDirection direction)
+bool Field::Move(Shape::Shape& shape, MOVE_DIRECTION direction)
 {
     if(!CanMove(shape, direction))
     {
         return false;
     }
 
-    for(auto& block : shape.blocks)
+    switch (direction)
     {
-        switch (direction)
-        {
-            case MoveDirection::LEFT:
-                block.x -= 1;
-                break;
-            case MoveDirection::RIGHT:
-                block.x += 1;
-                break;
-            case MoveDirection::DOWN:
-                block.y += 1;
-                break;
-        }
+        case MOVE_DIRECTION::LEFT:
+            shape.MoveLeft();
+            break;
+        case MOVE_DIRECTION::RIGHT:
+            shape.MoveRight();
+            break;
+        case MOVE_DIRECTION::DOWN:
+            shape.MoveDown();
+            break;
     }
 
     return true;
@@ -58,9 +55,10 @@ bool Field::Move(Shape::Shape& shape, MoveDirection direction)
 
 void Field::UpdateField(Shape::Shape& shape)
 {
-    for(const auto& block : shape.blocks)
+    for(const auto& block : shape.GetBlocks())
     {
-        cells[block.y][block.x] = shape.color;
+        std::cout << block.x << ' ' << block.y << std::endl;
+        cells[block.y][block.x] = shape.GetColor();
     }
 
     for(int i = 19; i >= 0; --i)

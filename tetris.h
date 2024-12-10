@@ -24,7 +24,7 @@ void Tetris()
     while (window.isOpen())
     {
         sf::Event event;
-        MoveDirection direction = MoveDirection::NONE;
+        MOVE_DIRECTION direction = MOVE_DIRECTION::NONE;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
@@ -34,9 +34,9 @@ void Tetris()
 
             if(event.type == sf::Event::KeyPressed)
             {
-                if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { direction = MoveDirection::LEFT; }
-                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { direction = MoveDirection::RIGHT; }
-                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { direction = MoveDirection::DOWN; }
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { direction = MOVE_DIRECTION::LEFT; }
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { direction = MOVE_DIRECTION::RIGHT; }
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { direction = MOVE_DIRECTION::DOWN; }
                 else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) { shape.Rotate(); }
                 field.Move(shape, direction);
             }
@@ -61,7 +61,7 @@ void Tetris()
             }
         }
 
-        for(const auto& block : shape.blocks)
+        for(const auto& block : shape.GetBlocks())
         {
             float x = block.x * 40.f;
             float y = block.y * 40.f;
@@ -74,7 +74,7 @@ void Tetris()
 
             sf::RectangleShape piece(sf::Vector2f(40, 40));
 
-            piece.setFillColor(shape.color);
+            piece.setFillColor(shape.GetColor());
 
             piece.setPosition(x, y);
 
@@ -88,7 +88,7 @@ void Tetris()
         int timeSinceLastFall = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastFallTime).count();
         if (timeSinceLastFall > 300) {
             lastFallTime = now;
-            if (!field.Move(shape, MoveDirection::DOWN))
+            if (!field.Move(shape, MOVE_DIRECTION::DOWN))
             {
                 field.UpdateField(shape);
                 shape.Change();

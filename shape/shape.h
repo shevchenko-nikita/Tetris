@@ -34,8 +34,9 @@ namespace Shape
         S_BLOCK
     };
 
-    struct Shape
+    class Shape
     {
+    public:
         Shape()
         {
             Change();
@@ -46,14 +47,24 @@ namespace Shape
         {
         }
 
+        std::vector<Coordinate> GetBlocks() const;
+        sf::Color GetColor() const;
+
+        void MoveLeft();
+        void MoveRight();
+        void MoveDown();
+
         void Change();
         void Rotate();
 
+    private:
         std::vector<Coordinate> blocks;
-        sf::Color color;
-
         SHAPE_TYPES shapeType;
         uint8_t state = 0;
+        sf::Color color;
+
+        int shift_x = 0;
+        int shift_y = 0;
     };
 
     const std::vector<Coordinate> J_BLOCK_STATES[4] =
