@@ -23,16 +23,16 @@ namespace Shape
         int y;
     };
 
-    const std::vector<std::vector<Coordinate>> ALL_SHAPES =
-            {
-                    {{4, 0}, {5, 0}, {5, 1}, {5, 2}},
-                    {{4, 0}, {4, 1}, {4, 2}, {4, 3}},
-                    {{5, 0}, {5, 1}, {5, 2}, {4, 2}},
-                    {{4, 0}, {4, 1}, {5, 0}, {5, 1}},
-                    {{5, 0}, {5, 1}, {4, 1}, {4, 2}},
-                    {{4, 1}, {5, 0}, {5, 1}, {5, 2}},
-                    {{4, 0}, {4, 1}, {5, 1}, {5, 2}}
-            };
+    enum class SHAPE_TYPES
+    {
+        J_BLOCK,
+        L_BLOCK,
+        I_BLOCK,
+        O_BLOCK,
+        E_BLOCK,
+        Z_BLOCK,
+        S_BLOCK
+    };
 
     struct Shape
     {
@@ -41,17 +41,58 @@ namespace Shape
             Change();
         }
 
-        void Change()
+        Shape(std::initializer_list<Coordinate> positions)
+        : blocks(positions)
         {
-            static int colorId = 0;
-            int shapeId = rand() % 7;
-
-            blocks = ALL_SHAPES[shapeId];
-            color = COLORS[colorId];
-            colorId = (colorId + 1) % 5;
         }
+
+        void Change();
+        void Rotate();
 
         std::vector<Coordinate> blocks;
         sf::Color color;
     };
+
+    const std::vector<Coordinate> J_BLOCK_STATES[4] =
+    {
+            {{5, 0}, {5, 1}, {5, 2}, {4, 2}},
+            {{4, 0}, {4, 1}, {5, 1}, {6, 1}},
+            {{5, 0}, {6, 0}, {5, 1}, {5, 2}},
+            {{4, 1}, {5, 1}, {6, 1}, {6, 2}}
+    };
+
+    const std::vector<Coordinate> L_BLOCK_STATES[4] =
+    {
+            {{4, 0}, {5, 0}, {5, 1}, {5, 2}},
+            {{4, 1}, {5, 1}, {6, 1}, {6, 0}},
+            {{5, 0}, {5, 1}, {5, 2}, {6, 2}},
+            {{4, 2}, {4, 1}, {5, 1}, {6, 1}}
+    };
+
+    const std::vector<Coordinate> I_BLOCK_STATES[2] =
+    {
+            {{4, 0}, {4, 1}, {4, 2}, {4, 3}},
+            {{3, 1}, {4, 1}, {5, 1}, {6, 1}}
+    };
+
+    const std::vector<Coordinate> O_BLOCK_STATES[4] =
+    {
+            {{4, 0}, {4, 1}, {5, 0}, {5, 1}}
+    };
+
+    const std::vector<Coordinate> E_BLOCK_STATES[4] =
+    {
+            {{4, 1}, {5, 0}, {5, 1}, {5, 2}}
+    };
+
+    const std::vector<Coordinate> Z_BLOCK_STATES[4] =
+    {
+            {{5, 0}, {5, 1}, {4, 1}, {4, 2}}
+    };
+
+    const std::vector<Coordinate> S_BLOCK_STATES[4] =
+    {
+            {{4, 0}, {4, 1}, {5, 1}, {5, 2}}
+    };
+
 };

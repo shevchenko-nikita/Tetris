@@ -41,17 +41,17 @@ void Tetris()
             }
         }
 
-        for(int i = 0; i < field.WIDTH; ++i)
+        for(int i = 0; i < field.HEIGHT; ++i)
         {
-            for(int j = 0; j < field.HEIGHT; ++j)
+            for(int j = 0; j < field.WIDTH; ++j)
             {
-                float x = i * 40.f;
-                float y = j * 40.f;
+                float y = i * 40.f;
+                float x = j * 40.f;
 
                 sf::RectangleShape block(sf::Vector2f(40, 40));
                 block.setPosition(x, y);
 
-                block.setFillColor(field.GetColor(j, i));
+                block.setFillColor(field.GetColor(i, j));
 
                 block.setOutlineThickness(1.3f);
                 block.setOutlineColor(sf::Color(125, 125, 125));

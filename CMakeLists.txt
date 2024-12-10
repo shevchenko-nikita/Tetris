@@ -3,7 +3,7 @@ project(Tetris)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Tetris main.cpp field/field.cpp)
+add_executable(Tetris main.cpp shape/shape.cpp field/field.cpp)
 
 set(SFML_DIR "C:/SFML/lib/cmake/SFML")
 
