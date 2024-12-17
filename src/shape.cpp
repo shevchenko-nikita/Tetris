@@ -4,9 +4,9 @@ enum class MOVE_DIRECTION;
 
 namespace Shape
 {
-    std::vector<Coordinate> Shape::GetBlocks() const
+    std::vector<Position> Shape::GetBlocks() const
     {
-        std::vector<Coordinate> coordinates = blocks;
+        std::vector<Position> coordinates = blocks;
         for(auto& pr : coordinates)
         {
             pr.x += shift_x;

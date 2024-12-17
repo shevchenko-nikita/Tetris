@@ -34,7 +34,7 @@ public:
         }
     }
 
-    bool IsCellEmpty(Shape::Coordinate position) const;
+    bool IsCellEmpty(Position position) const;
     bool CanMove(Shape::Shape& shape, MOVE_DIRECTION direction) const;
     bool Move(Shape::Shape& shape, MOVE_DIRECTION direction);
 

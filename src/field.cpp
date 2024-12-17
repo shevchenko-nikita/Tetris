@@ -1,7 +1,7 @@
 #include <iostream>
 #include "field.h"
 
-bool Field::IsCellEmpty(Shape::Coordinate position) const
+bool Field::IsCellEmpty(Position position) const
 {
     if(position.x < 0 || position.y < 0) { return false; }
     if(position.x >= 10 || position.y >= 20) { return false; }
@@ -57,7 +57,6 @@ void Field::UpdateField(Shape::Shape& shape)
 {
     for(const auto& block : shape.GetBlocks())
     {
-        std::cout << block.x << ' ' << block.y << std::endl;
         cells[block.y][block.x] = shape.GetColor();
     }
 
