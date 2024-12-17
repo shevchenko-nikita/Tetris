@@ -9,7 +9,7 @@ bool Field::IsCellEmpty(Position position) const
     return true;
 }
 
-bool Field::CanMove(Shape::Shape& shape, MOVE_DIRECTION direction) const
+bool Field::CanMove(Shape& shape, MOVE_DIRECTION direction) const
 {
     for(const auto& block : shape.GetBlocks())
     {
@@ -30,7 +30,7 @@ bool Field::CanMove(Shape::Shape& shape, MOVE_DIRECTION direction) const
     return true;
 }
 
-bool Field::Move(Shape::Shape& shape, MOVE_DIRECTION direction)
+bool Field::Move(Shape& shape, MOVE_DIRECTION direction)
 {
     if(!CanMove(shape, direction))
     {
@@ -53,7 +53,7 @@ bool Field::Move(Shape::Shape& shape, MOVE_DIRECTION direction)
     return true;
 }
 
-void Field::UpdateField(Shape::Shape& shape)
+void Field::UpdateField(Shape& shape)
 {
     for(const auto& block : shape.GetBlocks())
     {

@@ -17,7 +17,7 @@ void Tetris()
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH * 40, WINDOW_HEIGHT * 40), "Tetris");
 
     Field field;
-    Shape::Shape shape;
+    Shape shape;
 
     auto lastFallTime = std::chrono::high_resolution_clock::now();
 

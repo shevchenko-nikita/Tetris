@@ -35,12 +35,12 @@ public:
     }
 
     bool IsCellEmpty(Position position) const;
-    bool CanMove(Shape::Shape& shape, MOVE_DIRECTION direction) const;
-    bool Move(Shape::Shape& shape, MOVE_DIRECTION direction);
+    bool CanMove(Shape& shape, MOVE_DIRECTION direction) const;
+    bool Move(Shape& shape, MOVE_DIRECTION direction);
 
     sf::Color GetColor(int i, int j) { return cells[i][j]; }
 
-    void UpdateField(Shape::Shape& shape);
+    void UpdateField(Shape& shape);
 
 private:
     sf::Color cells[20][10];
