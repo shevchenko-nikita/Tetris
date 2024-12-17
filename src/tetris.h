@@ -6,7 +6,7 @@
 #include <time.h>
 #include <cassert>
 
-#include "field/field.h"
+#include "field.h"
 
 const int WINDOW_WIDTH = 10;
 const int WINDOW_HEIGHT = 20;

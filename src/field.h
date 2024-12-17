@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../shape/shape.h"
+#include "shape.h"
 
 #include <vector>
 #include <cstdlib>
