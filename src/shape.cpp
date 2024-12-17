@@ -106,3 +106,41 @@ void Shape::Rotate()
             break;
     }
 }
+
+void Shape::UndoRotate()
+{
+    // return previous state
+    //
+
+    switch (shapeType)
+    {
+        case SHAPE_TYPES::J_BLOCK:
+            state = (state + 3) % 4;
+            blocks = J_BLOCK_STATES[state];
+            break;
+        case SHAPE_TYPES::L_BLOCK:
+            state = (state + 3) % 4;
+            blocks = L_BLOCK_STATES[state];
+            break;
+        case SHAPE_TYPES::O_BLOCK:
+            state %= 1;
+            blocks = O_BLOCK_STATES[state];
+            break;
+        case SHAPE_TYPES::I_BLOCK:
+            state = (state + 1) % 2;
+            blocks = I_BLOCK_STATES[state];
+            break;
+        case SHAPE_TYPES::E_BLOCK:
+            state = (state + 3) % 4;
+            blocks = E_BLOCK_STATES[state];
+            break;
+        case SHAPE_TYPES::Z_BLOCK:
+            state = (state + 1) % 2;
+            blocks = Z_BLOCK_STATES[state];
+            break;
+        case SHAPE_TYPES::S_BLOCK:
+            state = (state + 1) % 2;
+            blocks = S_BLOCK_STATES[state];
+            break;
+    }
+}

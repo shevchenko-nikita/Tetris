@@ -50,6 +50,7 @@ public:
 
     void Change();
     void Rotate();
+    void UndoRotate();
 
 private:
     std::vector<Position> blocks;
