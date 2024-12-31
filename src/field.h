@@ -34,14 +34,17 @@ public:
         }
     }
 
-    bool IsCellEmpty(Position position) const;
-    bool CanMove(Shape& shape, MOVE_DIRECTION direction) const;
+    void UpdateRecord(int filledLinesNum);
+    void UpdateField(Shape& shape);
+
     bool Move(Shape& shape, MOVE_DIRECTION direction);
 
-    sf::Color GetColor(int i, int j) { return cells[i][j]; }
-
-    void UpdateField(Shape& shape);
+    int GetRecord() const;
+    sf::Color GetColor(int i, int j) const;
+    bool IsCellEmpty(Position position) const;
+    bool CanMove(Shape& shape, MOVE_DIRECTION direction) const;
 
 private:
     sf::Color cells[20][10];
+    int record = 0;
 };

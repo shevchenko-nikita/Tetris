@@ -10,7 +10,7 @@
 
 #include "field.h"
 
-const int WINDOW_WIDTH = 10;
+const int WINDOW_WIDTH = 18;
 const int WINDOW_HEIGHT = 20;
 
 void Tetris()
@@ -25,6 +25,7 @@ void Tetris()
 
     while (window.isOpen())
     {
+        window.clear(sf::Color::White);
         sf::Event event;
         MOVE_DIRECTION direction = MOVE_DIRECTION::NONE;
         while (window.pollEvent(event))
@@ -82,6 +83,7 @@ void Tetris()
             if(!field.IsCellEmpty(block))
             {
                 std::cout << "GAME OVER!";
+                std::cout << "\n" << field.GetRecord() << std::endl;
                 return;
             }
 

@@ -9,6 +9,16 @@ bool Field::IsCellEmpty(Position position) const
     return true;
 }
 
+sf::Color Field::GetColor(int i, int j) const
+{
+    return cells[i][j];
+}
+
+int Field::GetRecord() const
+{
+    return record;
+}
+
 bool Field::CanMove(Shape& shape, MOVE_DIRECTION direction) const
 {
     for(const auto& block : shape.GetBlocks())
@@ -53,12 +63,34 @@ bool Field::Move(Shape& shape, MOVE_DIRECTION direction)
     return true;
 }
 
+void Field::UpdateRecord(int filledLinesNum)
+{
+    switch(filledLinesNum)
+    {
+        case 1:
+            record += 100;
+            break;
+        case 2:
+            record += 300;
+            break;
+        case 3:
+            record += 700;
+            break;
+        case 4:
+            record += 1500;
+            break;
+    }
+}
+
+
 void Field::UpdateField(Shape& shape)
 {
     for(const auto& block : shape.GetBlocks())
     {
         cells[block.y][block.x] = shape.GetColor();
     }
+
+    int filledLinesNum = 0;
 
     for(int i = 19; i >= 0; --i)
     {
@@ -73,6 +105,8 @@ void Field::UpdateField(Shape& shape)
         }
 
         if(f) { continue; }
+
+        ++filledLinesNum;
 
         for(int j = 0; j < 10; ++j)
         {
@@ -90,4 +124,6 @@ void Field::UpdateField(Shape& shape)
 
         i++;
     }
+
+    UpdateRecord(filledLinesNum);
 }
