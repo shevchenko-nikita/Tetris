@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <iostream>
+#include <string>
 #include <chrono>
 #include <thread>
 #include <time.h>
@@ -23,9 +24,19 @@ void Tetris()
 
     auto lastFallTime = std::chrono::high_resolution_clock::now();
 
+    sf::Font font;
+    font.loadFromFile("../style/fonts/Poppins-Black.ttf");
+
+    sf::Text record;
+    record.setFont(font);
+    record.setCharacterSize(24);
+    record.setFillColor(sf::Color::Black);
+    record.setPosition(12 * 40 + 20, 40);
+
     while (window.isOpen())
     {
         window.clear(sf::Color::White);
+
         sf::Event event;
         MOVE_DIRECTION direction = MOVE_DIRECTION::NONE;
         while (window.pollEvent(event))
@@ -109,6 +120,9 @@ void Tetris()
                 shape.Change();
             }
         }
+
+        record.setString("Record: " + std::to_string(field.GetRecord()));
+        window.draw(record);
 
         window.display();
     }
