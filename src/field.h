@@ -23,16 +23,7 @@ public:
     const int WIDTH = 10;
     const int HEIGHT = 20;
 
-    Field()
-    {
-        for(int i = 0; i < HEIGHT; ++i)
-        {
-            for(int j = 0; j < WIDTH; ++j)
-            {
-                cells[i][j] = sf::Color::White;
-            }
-        }
-    }
+    Field();
 
     void UpdateRecord(int filledLinesNum);
     void UpdateField(Shape& shape);

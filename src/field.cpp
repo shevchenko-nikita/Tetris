@@ -1,6 +1,17 @@
 #include <iostream>
 #include "field.h"
 
+Field::Field()
+{
+    for(int i = 0; i < HEIGHT; ++i)
+    {
+        for(int j = 0; j < WIDTH; ++j)
+        {
+            cells[i][j] = sf::Color::White;
+        }
+    }
+}
+
 bool Field::IsCellEmpty(Position position) const
 {
     if(position.x < 0 || position.y < 0) { return false; }
