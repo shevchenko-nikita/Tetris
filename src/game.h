@@ -13,7 +13,7 @@ enum class MOVE_DIRECTION
     RIGHT
 };
 
-class Field
+class Game
 {
 public:
     const int CELL_SIZE = 40;
@@ -23,7 +23,7 @@ public:
     const int WIDTH = 10;
     const int HEIGHT = 20;
 
-    Field();
+    Game();
 
     void UpdateRecord(int filledLinesNum);
     void UpdateField(Shape& shape);

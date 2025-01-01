@@ -1,7 +1,7 @@
 #include <iostream>
-#include "field.h"
+#include "game.h"
 
-Field::Field()
+Game::Game()
 {
     for(int i = 0; i < HEIGHT; ++i)
     {
@@ -12,7 +12,7 @@ Field::Field()
     }
 }
 
-bool Field::IsCellEmpty(Position position) const
+bool Game::IsCellEmpty(Position position) const
 {
     if(position.x < 0 || position.y < 0) { return false; }
     if(position.x >= 10 || position.y >= 20) { return false; }
@@ -20,17 +20,17 @@ bool Field::IsCellEmpty(Position position) const
     return true;
 }
 
-sf::Color Field::GetColor(int i, int j) const
+sf::Color Game::GetColor(int i, int j) const
 {
     return cells[i][j];
 }
 
-int Field::GetRecord() const
+int Game::GetRecord() const
 {
     return record;
 }
 
-bool Field::CanMove(Shape& shape, MOVE_DIRECTION direction) const
+bool Game::CanMove(Shape& shape, MOVE_DIRECTION direction) const
 {
     for(const auto& block : shape.GetBlocks())
     {
@@ -51,7 +51,7 @@ bool Field::CanMove(Shape& shape, MOVE_DIRECTION direction) const
     return true;
 }
 
-bool Field::Move(Shape& shape, MOVE_DIRECTION direction)
+bool Game::Move(Shape& shape, MOVE_DIRECTION direction)
 {
     if(!CanMove(shape, direction))
     {
@@ -74,7 +74,7 @@ bool Field::Move(Shape& shape, MOVE_DIRECTION direction)
     return true;
 }
 
-void Field::UpdateRecord(int filledLinesNum)
+void Game::UpdateRecord(int filledLinesNum)
 {
     switch(filledLinesNum)
     {
@@ -94,7 +94,7 @@ void Field::UpdateRecord(int filledLinesNum)
 }
 
 
-void Field::UpdateField(Shape& shape)
+void Game::UpdateField(Shape& shape)
 {
     for(const auto& block : shape.GetBlocks())
     {

@@ -9,7 +9,7 @@
 #include <time.h>
 #include <cassert>
 
-#include "field.h"
+#include "game.h"
 
 const int WINDOW_WIDTH = 18;
 const int WINDOW_HEIGHT = 20;
@@ -19,7 +19,7 @@ void Tetris()
     srand(time(NULL));
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH * 40, WINDOW_HEIGHT * 40), "Tetris");
 
-    Field field;
+    Game game;
     Shape shape;
 
     auto lastFallTime = std::chrono::high_resolution_clock::now();
@@ -56,20 +56,20 @@ void Tetris()
                     shape.Rotate();
                     for(const auto& position : shape.GetBlocks())
                     {
-                        if (!field.IsCellEmpty(position))
+                        if (!game.IsCellEmpty(position))
                         {
                             shape.UndoRotate();
                             break;
                         }
                     }
                 }
-                field.Move(shape, direction);
+                game.Move(shape, direction);
             }
         }
 
-        for(int i = 0; i < field.HEIGHT; ++i)
+        for(int i = 0; i < game.HEIGHT; ++i)
         {
-            for(int j = 0; j < field.WIDTH; ++j)
+            for(int j = 0; j < game.WIDTH; ++j)
             {
                 float y = i * 40.f;
                 float x = j * 40.f;
@@ -77,7 +77,7 @@ void Tetris()
                 sf::RectangleShape block(sf::Vector2f(40, 40));
                 block.setPosition(x, y);
 
-                block.setFillColor(field.GetColor(i, j));
+                block.setFillColor(game.GetColor(i, j));
 
                 block.setOutlineThickness(1.3f);
                 block.setOutlineColor(sf::Color(125, 125, 125));
@@ -91,10 +91,10 @@ void Tetris()
             float x = block.x * 40.f;
             float y = block.y * 40.f;
 
-            if(!field.IsCellEmpty(block))
+            if(!game.IsCellEmpty(block))
             {
                 std::cout << "GAME OVER!";
-                std::cout << "\n" << field.GetRecord() << std::endl;
+                std::cout << "\n" << game.GetRecord() << std::endl;
                 return;
             }
 
@@ -114,14 +114,14 @@ void Tetris()
         int timeSinceLastFall = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastFallTime).count();
         if (timeSinceLastFall > 300) {
             lastFallTime = now;
-            if (!field.Move(shape, MOVE_DIRECTION::DOWN))
+            if (!game.Move(shape, MOVE_DIRECTION::DOWN))
             {
-                field.UpdateField(shape);
+                game.UpdateField(shape);
                 shape.Change();
             }
         }
 
-        record.setString("Record: " + std::to_string(field.GetRecord()));
+        record.setString("Record: " + std::to_string(game.GetRecord()));
         window.draw(record);
 
         window.display();
